@@ -19,15 +19,15 @@ export function Tasks() {
   );
 }
 
-// export function TaskItem({
-//   title,
-//   isDone,
-// }: {
-//   title: string;
-//   isDone?: boolean;
-// }) {
-//   if (isDone) {
-//     return null;
-//   }
-//   return <li>{title}</li>;
-// }
+export function TaskItem({
+  title,
+  isDone,
+}: {
+  title: string;
+  isDone?: boolean;
+}) {
+  if (isDone) {
+    return null;
+  }
+  return <li>{title}</li>;
+}
