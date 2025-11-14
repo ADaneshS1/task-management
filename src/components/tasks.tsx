@@ -1,11 +1,26 @@
 import { CheckCircle, Circle } from "lucide-react";
 
 const dataTasks = [
-  { id: 1, title: "Pray", isDone: true },
-  { id: 2, title: "Eat", isDone: false },
-  { id: 3, title: "Exerceise", isDone: true },
-  { id: 4, title: "Rest", isDone: false },
-  { id: 5, title: "Study", isDone: false },
+  { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
+  { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
+  {
+    id: 3,
+    title: "Exercise",
+    description: "Quick workout for 20 minutes",
+    isDone: true,
+  },
+  {
+    id: 4,
+    title: "Rest",
+    description: "Take a break and relax",
+    isDone: false,
+  },
+  {
+    id: 5,
+    title: "Study",
+    description: "Learn React for 1 hour",
+    isDone: false,
+  },
 ];
 
 export function Tasks() {
@@ -15,7 +30,12 @@ export function Tasks() {
 
       <ul className="space-y-3">
         {dataTasks.map((task) => (
-          <TaskItem key={task.id} title={task.title} isDone={task.isDone} />
+          <TaskItem
+            key={task.id}
+            title={task.title}
+            description={task.description}
+            isDone={task.isDone}
+          />
         ))}
       </ul>
     </section>
@@ -24,13 +44,13 @@ export function Tasks() {
 
 export function TaskItem({
   title,
+  description,
   isDone,
 }: {
   title: string;
+  description: string;
   isDone?: boolean;
 }) {
-  if (isDone) return null;
-
   return (
     <li className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 border border-gray-200">
       {isDone ? (
@@ -38,7 +58,10 @@ export function TaskItem({
       ) : (
         <Circle className="text-gray-400" />
       )}
-      {title}
+      <div>
+        <p>{title}</p>
+        <p>{description}</p>
+      </div>
     </li>
   );
 }
