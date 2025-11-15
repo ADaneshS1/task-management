@@ -1,4 +1,5 @@
 import { CheckCircle, Circle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const dataTasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
@@ -54,19 +55,49 @@ export function TaskItem({
   return (
     <li
       className="
-        flex items-center gap-3 p-3 rounded-lg bg-gray-100 border border-gray-200
+        flex items-center justify-between gap-3 p-3 rounded-lg 
+        bg-gray-100 border border-gray-200
         hover:bg-gray-200 hover:border-gray-300 cursor-pointer
         transition-all duration-200
       "
     >
-      {isDone ? (
-        <CheckCircle className="text-green-500" />
-      ) : (
-        <Circle className="text-gray-400" />
-      )}
-      <div>
-        <p className="font-medium">{title}</p>
-        <p className="text-sm text-gray-600">{description}</p>
+      <div className="flex items-center gap-3">
+        {isDone ? (
+          <CheckCircle className="text-green-500" />
+        ) : (
+          <Circle className="text-gray-400" />
+        )}
+
+        <div>
+          <p className="font-medium">{title}</p>
+          <p className="text-sm text-gray-600">{description}</p>
+        </div>
+      </div>
+
+      <div className="flex gap-2">
+        {/* Edit Button */}
+        <Button
+          variant="outline"
+          className="
+            h-7 px-3 rounded-lg 
+            text-blue-600 border-blue-300 
+            hover:bg-blue-50 hover:text-blue-700
+          "
+        >
+          Edit
+        </Button>
+
+        {/* Delete Button */}
+        <Button
+          variant="outline"
+          className="
+            h-7 px-3 rounded-lg 
+            text-red-600 border-red-300 
+            hover:bg-red-50 hover:text-red-700
+          "
+        >
+          Delete
+        </Button>
       </div>
     </li>
   );
