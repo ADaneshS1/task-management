@@ -1,6 +1,15 @@
 import { CheckCircle, Circle } from "lucide-react";
 
-const dataTasks = [
+type Task = {
+  id: number;
+  title: string;
+  description: string;
+  isDone: boolean;
+};
+
+type Tasks = Task[];
+
+const dataTasks: Tasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
   { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
   {
@@ -30,27 +39,14 @@ export function Tasks() {
 
       <ul className="space-y-3">
         {dataTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            isDone={task.isDone}
-          />
+          <TaskItem key={task.id} task={task} />
         ))}
       </ul>
     </section>
   );
 }
 
-export function TaskItem({
-  title,
-  description,
-  isDone,
-}: {
-  title: string;
-  description: string;
-  isDone?: boolean;
-}) {
+export function TaskItem({ task }: { task: Task }) {
   return (
     <li
       className="
@@ -59,14 +55,14 @@ export function TaskItem({
         transition-all duration-200
       "
     >
-      {isDone ? (
-        <CheckCircle className="text-green-500" />
-      ) : (
-        <Circle className="text-gray-400" />
-      )}
       <div>
-        <p className="font-medium">{title}</p>
-        <p className="text-sm text-gray-600">{description}</p>
+        {task.isDone && <CheckCircle className="text-green-500" />}
+        {!task.isDone && <Circle className="text-gray-400" />}
+      </div>
+
+      <div>
+        <p className="font-medium">{task.title}</p>
+        <p className="text-sm text-gray-600">{task.description}</p>
       </div>
     </li>
   );
