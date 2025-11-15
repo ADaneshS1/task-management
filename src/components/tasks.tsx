@@ -52,15 +52,21 @@ export function TaskItem({
   isDone?: boolean;
 }) {
   return (
-    <li className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 border border-gray-200">
+    <li
+      className="
+        flex items-center gap-3 p-3 rounded-lg bg-gray-100 border border-gray-200
+        hover:bg-gray-200 hover:border-gray-300 cursor-pointer
+        transition-all duration-200
+      "
+    >
       {isDone ? (
         <CheckCircle className="text-green-500" />
       ) : (
         <Circle className="text-gray-400" />
       )}
       <div>
-        <p>{title}</p>
-        <p>{description}</p>
+        <p className="font-medium">{title}</p>
+        <p className="text-sm text-gray-600">{description}</p>
       </div>
     </li>
   );
