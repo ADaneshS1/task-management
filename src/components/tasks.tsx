@@ -1,4 +1,4 @@
-import { CheckCircle, Circle } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const dataTasks = [
@@ -55,47 +55,42 @@ export function TaskItem({
   return (
     <li
       className="
-        flex items-center justify-between gap-3 p-3 rounded-lg 
-        bg-gray-100 border border-gray-200
-        hover:bg-gray-200 hover:border-gray-300 cursor-pointer
-        transition-all duration-200
+        flex items-center justify-between p-4
+        bg-blue-50 border border-blue-100 rounded-xl
       "
     >
-      <div className="flex items-center gap-3">
-        {isDone ? (
-          <CheckCircle className="text-green-500" />
-        ) : (
-          <Circle className="text-gray-400" />
-        )}
-
-        <div>
-          <p className="font-medium">{title}</p>
-          <p className="text-sm text-gray-600">{description}</p>
-        </div>
+      <div>
+        <p className="font-semibold text-gray-800">{title}</p>
+        <p className="font-semibold text-gray-800">{description}</p>
+        <p className="text-sm text-gray-600">
+          {isDone ? "✔️ Done" : "📝 Todo"}
+        </p>
       </div>
 
       <div className="flex gap-2">
-        {/* Edit Button */}
+        {/* VIEW */}
         <Button
-          variant="outline"
           className="
-            h-7 px-3 rounded-lg 
-            text-blue-600 border-blue-300 
-            hover:bg-blue-50 hover:text-blue-700
+            flex items-center gap-1 
+            bg-blue-600 text-white 
+            hover:bg-blue-700 
+            rounded-full px-3 h-8
           "
         >
-          Edit
+          <Eye className="w-4 h-4" />
+          View
         </Button>
 
-        {/* Delete Button */}
+        {/* DELETE */}
         <Button
-          variant="outline"
           className="
-            h-7 px-3 rounded-lg 
-            text-red-600 border-red-300 
-            hover:bg-red-50 hover:text-red-700
+            flex items-center gap-1
+            bg-red-600 text-white 
+            hover:bg-red-700 
+            rounded-full px-3 h-8
           "
         >
+          <Trash2 className="w-4 h-4" />
           Delete
         </Button>
       </div>
