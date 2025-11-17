@@ -36,8 +36,9 @@ const initialDataTasks: Tasks = [
 
 export function Tasks() {
   const [tasks, setTasks] = useState(initialDataTasks);
-  function handleDelete() {
-    console.log("Delete");
+  function handleDelete(id: number) {
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
   }
 
   return (
@@ -45,7 +46,7 @@ export function Tasks() {
       <ul className="space-y-3">
         {tasks.map((task) => (
           <li key={task.id}>
-            <TaskItem task={task} handleDelete={handleDelete} />
+            <TaskItem task={task} handleDelete={() => handleDelete(task.id)} />
           </li>
         ))}
       </ul>
@@ -82,6 +83,7 @@ export function TaskItem({
             bg-blue-600 text-white 
             hover:bg-blue-700 
             rounded-full px-3 h-8
+            cursor-pointer
           "
         >
           <Eye className="w-4 h-4" />
@@ -95,6 +97,7 @@ export function TaskItem({
             bg-red-600 text-white 
             hover:bg-red-700 
             rounded-full px-3 h-8
+            cursor-pointer
           "
         >
           <Trash2 className="w-4 h-4" />
