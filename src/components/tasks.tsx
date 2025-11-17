@@ -48,6 +48,10 @@ export function Tasks() {
 }
 
 export function TaskItem({ task }: { task: Task }) {
+  function handleDelete() {
+    console.log("Delete");
+  }
+
   return (
     <li
       className="
@@ -56,11 +60,11 @@ export function TaskItem({ task }: { task: Task }) {
       "
     >
       <div>
-        <p className="font-semibold text-gray-800">{task.title}</p>
-        <p className="font-semibold text-gray-800">{task.description}</p>
         <p className="text-sm text-gray-600">
           {task.isDone ? "✔️ Done" : "📝 Todo"}
         </p>
+        <p className="font-semibold text-gray-800">{task.title}</p>
+        <p className="font-semibold text-gray-800">{task.description}</p>
       </div>
 
       <div className="flex gap-2">
@@ -77,6 +81,7 @@ export function TaskItem({ task }: { task: Task }) {
         </Button>
 
         <Button
+          onClick={handleDelete}
           className="
             flex items-center gap-1
             bg-red-600 text-white 
