@@ -1,4 +1,4 @@
-import { Eye, Trash2 } from "lucide-react";
+import { EyeIcon, Trash2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -36,6 +36,7 @@ const initialDataTasks: Tasks = [
 
 export function Tasks() {
   const [tasks, setTasks] = useState(initialDataTasks);
+
   function handleDelete(id: number) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
@@ -78,31 +79,14 @@ export function TaskItem({
       </div>
 
       <div className="flex gap-2">
-        <Button
-          className="
-            flex items-center gap-1 
-            bg-blue-600 text-white 
-            hover:bg-blue-700 
-            rounded-full px-3 h-8
-            cursor-pointer
-          "
-        >
-          <Eye className="w-4 h-4" />
-          View
+        <Button>
+          <EyeIcon />
+          <span>View</span>
         </Button>
 
-        <Button
-          onClick={handleDelete}
-          className="
-            flex items-center gap-1
-            bg-red-600 text-white 
-            hover:bg-red-700 
-            rounded-full px-3 h-8
-            cursor-pointer
-          "
-        >
-          <Trash2 className="w-4 h-4" />
-          Delete
+        <Button onClick={handleDelete} variant="destructive">
+          <Trash2Icon />
+          <span>Delete</span>
         </Button>
       </div>
     </section>
