@@ -1,7 +1,16 @@
 import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const dataTasks = [
+type Task = {
+  id: number;
+  title: string;
+  description: string;
+  isDone: boolean;
+};
+
+type Tasks = Task[];
+
+const dataTasks: Tasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
   { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
   {
@@ -31,27 +40,14 @@ export function Tasks() {
 
       <ul className="space-y-3">
         {dataTasks.map((task) => (
-          <TaskItem
-            key={task.id}
-            title={task.title}
-            description={task.description}
-            isDone={task.isDone}
-          />
+          <TaskItem task={task} />
         ))}
       </ul>
     </section>
   );
 }
 
-export function TaskItem({
-  title,
-  description,
-  isDone,
-}: {
-  title: string;
-  description: string;
-  isDone?: boolean;
-}) {
+export function TaskItem({ task }: { task: Task }) {
   return (
     <li
       className="
@@ -60,15 +56,14 @@ export function TaskItem({
       "
     >
       <div>
-        <p className="font-semibold text-gray-800">{title}</p>
-        <p className="font-semibold text-gray-800">{description}</p>
+        <p className="font-semibold text-gray-800">{task.title}</p>
+        <p className="font-semibold text-gray-800">{task.description}</p>
         <p className="text-sm text-gray-600">
-          {isDone ? "✔️ Done" : "📝 Todo"}
+          {task.isDone ? "✔️ Done" : "📝 Todo"}
         </p>
       </div>
 
       <div className="flex gap-2">
-        {/* VIEW */}
         <Button
           className="
             flex items-center gap-1 
@@ -81,7 +76,6 @@ export function TaskItem({
           View
         </Button>
 
-        {/* DELETE */}
         <Button
           className="
             flex items-center gap-1
