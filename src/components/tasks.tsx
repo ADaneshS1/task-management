@@ -11,7 +11,7 @@ type Task = {
 
 type Tasks = Task[];
 
-const dataTasks: Tasks = [
+const initialDataTasks: Tasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
   { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
   {
@@ -35,16 +35,15 @@ const dataTasks: Tasks = [
 ];
 
 export function Tasks() {
+  const [tasks, setTasks] = useState(initialDataTasks);
   function handleDelete() {
     console.log("Delete");
   }
 
   return (
     <section className="max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Task Management</h2>
-
       <ul className="space-y-3">
-        {dataTasks.map((task) => (
+        {tasks.map((task) => (
           <li key={task.id}>
             <TaskItem task={task} handleDelete={handleDelete} />
           </li>
