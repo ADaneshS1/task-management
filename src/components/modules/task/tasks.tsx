@@ -43,6 +43,7 @@ export function Tasks() {
 
   return (
     <section className="max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
+      <h2>Task Management</h2>
       <ul className="space-y-3">
         {tasks.map((task) => (
           <li key={task.id}>
