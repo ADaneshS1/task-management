@@ -48,17 +48,19 @@ export function Tasks() {
 
     const formData = new FormData(event.currentTarget);
 
-    const title = formData.get("title");
+    const title = formData.get("title")?.toString();
+    if (!title) return null;
 
     const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
 
-    const newTask = {
+    const newTask: Task = {
       id: newId,
       title,
       isDone: false,
     };
 
-    console.log(newTask);
+    const updatedTasks: Tasks = [...tasks, newTask];
+    setTasks(updatedTasks);
   }
 
   return (
