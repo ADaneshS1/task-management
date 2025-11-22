@@ -43,9 +43,22 @@ export function Tasks() {
     setTasks(updatedTasks);
   }
 
-  function handleCreate(event: React.FormEvent) {
+  function handleCreate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log("handle create");
+
+    const formData = new FormData(event.currentTarget);
+
+    const title = formData.get("title");
+
+    const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
+
+    const newTask = {
+      id: newId,
+      title,
+      isDone: false,
+    };
+
+    console.log(newTask);
   }
 
   return (
@@ -57,9 +70,7 @@ export function Tasks() {
           <Label htmlFor="title">Title</Label>
           <Input id="title" type="text" name="title" />
         </div>
-        <Button type="submit" onSubmit={handleCreate}>
-          Add Task
-        </Button>
+        <Button type="submit">Add Task</Button>
       </form>
 
       <ul className="space-y-3">
