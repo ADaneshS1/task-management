@@ -3,16 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-
-type Task = {
-  id: number;
-  title: string;
-  description: string;
-  isDone: boolean;
-};
-
-type Tasks = Task[];
-
+import { type Task, type Tasks } from "@/components/modules/task/schema";
 const initialDataTasks: Tasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
   { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
@@ -73,6 +64,10 @@ export function Tasks() {
         <div className="space-y-2">
           <Label htmlFor="title">Title</Label>
           <Input id="title" type="text" name="title" />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="description">Description</Label>
+          <Input id="description" type="text" name="description" />
         </div>
         <Button type="submit">Add Task</Button>
       </form>
