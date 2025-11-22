@@ -10,8 +10,18 @@ import {
 } from "@/components/modules/task/schema";
 
 const initialDataTasks: Tasks = [
-  { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
-  { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
+  {
+    id: 1,
+    title: "Pray",
+    description: "Morning prayer routine",
+    isDone: true,
+  },
+  {
+    id: 2,
+    title: "Eat",
+    description: "Breakfast at 8 AM",
+    isDone: false,
+  },
   {
     id: 3,
     title: "Exercise",
@@ -34,6 +44,7 @@ const initialDataTasks: Tasks = [
 
 export function Tasks() {
   const [tasks, setTasks] = useState(initialDataTasks);
+
   function handleDelete(id: number) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
@@ -55,7 +66,7 @@ export function Tasks() {
 
     const result = TaskSchema.safeParse(newTask);
     if (!result.success) {
-      alert("New task data invalid");
+      alert("New title or description invalid");
       return null;
     }
 
@@ -66,10 +77,10 @@ export function Tasks() {
   }
 
   return (
-    <section className="max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800">Task Management</h2>
+    <section className="space-y-8 max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
+      <h2 className="text-2xl font-bold text-gray-800">Task Management</h2>
 
-      <form method="post" onSubmit={handleCreate} className="space-y-4">
+      <form method="post" onSubmit={handleCreate} className="space-y-2">
         <div className="space-y-2">
           <Label htmlFor="title">Title</Label>
           <Input id="title" type="text" name="title" required />
