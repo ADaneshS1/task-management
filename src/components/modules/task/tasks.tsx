@@ -78,29 +78,12 @@ export function TaskItem({
       </div>
 
       <div className="flex gap-2">
-        <Button
-          className="
-            flex items-center gap-1 
-            bg-blue-600 text-white 
-            hover:bg-blue-700 
-            rounded-full px-3 h-8
-            cursor-pointer
-          "
-        >
+        <Button>
           <Eye className="w-4 h-4" />
           View
         </Button>
 
-        <Button
-          onClick={handleDelete}
-          className="
-            flex items-center gap-1
-            bg-red-600 text-white 
-            hover:bg-red-700 
-            rounded-full px-3 h-8
-            cursor-pointer
-          "
-        >
+        <Button onClick={handleDelete} variant={"destructive"}>
           <Trash2 className="w-4 h-4" />
           Delete
         </Button>
