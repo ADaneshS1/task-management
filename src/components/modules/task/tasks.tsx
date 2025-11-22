@@ -43,8 +43,8 @@ export function Tasks() {
     setTasks(updatedTasks);
   }
 
-  function handleCreate(event: any) {
-    event.prefeventDefault();
+  function handleCreate(event: React.FormEvent) {
+    event.preventDefault();
     console.log("handle create");
   }
 
@@ -57,7 +57,9 @@ export function Tasks() {
           <Label htmlFor="title">Title</Label>
           <Input id="title" type="text" name="title" />
         </div>
-        <Button type="submit">Add Task</Button>
+        <Button type="submit" onSubmit={handleCreate}>
+          Add Task
+        </Button>
       </form>
 
       <ul className="space-y-3">
