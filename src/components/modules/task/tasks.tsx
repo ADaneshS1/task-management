@@ -1,6 +1,8 @@
 import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 type Task = {
   id: number;
@@ -41,9 +43,23 @@ export function Tasks() {
     setTasks(updatedTasks);
   }
 
+  function handleCreate(event: any) {
+    event.prefeventDefault();
+    console.log("handle create");
+  }
+
   return (
     <section className="max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Task Management</h2>
+
+      <form method="post" onSubmit={handleCreate} className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="title">Title</Label>
+          <Input id="title" type="text" name="title" />
+        </div>
+        <Button type="submit">Add Task</Button>
+      </form>
+
       <ul className="space-y-3">
         {tasks.map((task) => (
           <li key={task.id}>
