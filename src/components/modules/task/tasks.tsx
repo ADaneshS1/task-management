@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { type Task, type Tasks } from "@/components/modules/task/schema";
+import {
+  TaskSchema,
+  type Task,
+  type Tasks,
+} from "@/components/modules/task/schema";
+
 const initialDataTasks: Tasks = [
   { id: 1, title: "Pray", description: "Morning prayer routine", isDone: true },
   { id: 2, title: "Eat", description: "Breakfast at 8 AM", isDone: false },
@@ -39,16 +44,20 @@ export function Tasks() {
 
     const formData = new FormData(event.currentTarget);
 
-    const title = formData.get("title")?.toString();
-    if (!title) return null;
-
     const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
 
-    const newTask: Task = {
+    const newTask = {
       id: newId,
-      title,
+      title: formData.get("title")?.toString().trim() || "",
+      description: formData.get("description")?.toString().trim() || "",
       isDone: false,
     };
+
+    const result = TaskSchema.safeParse(newTask);
+    if (!result.success) {
+      alert("New task data invalid");
+      return null;
+    }
 
     const updatedTasks: Tasks = [...tasks, newTask];
     setTasks(updatedTasks);
@@ -63,11 +72,11 @@ export function Tasks() {
       <form method="post" onSubmit={handleCreate} className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="title">Title</Label>
-          <Input id="title" type="text" name="title" />
+          <Input id="title" type="text" name="title" required />
         </div>
         <div className="space-y-2">
           <Label htmlFor="description">Description</Label>
-          <Input id="description" type="text" name="description" />
+          <Input id="description" type="text" name="description" required />
         </div>
         <Button type="submit">Add Task</Button>
       </form>
