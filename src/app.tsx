@@ -1,6 +1,6 @@
 import { Tasks } from "./components/modules/task/tasks";
 
-export default function App() {
+export function App() {
   return (
     <section>
       <Tasks />

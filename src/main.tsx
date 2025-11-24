@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "@/index.css";
-import App from "@/app";
-import About from "@/routes/about";
+import { App } from "@/app";
+import { About } from "@/routes/about";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "./layouts/layout";
