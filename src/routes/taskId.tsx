@@ -1,5 +1,5 @@
 import type { Tasks } from "@/components/modules/task/schema";
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 
 const initialDataTasks: Tasks = [
   {
@@ -35,24 +35,36 @@ const initialDataTasks: Tasks = [
 ];
 
 export function TaskId() {
-  const params = useParams();
-  const { taskId } = params;
+  const { taskId } = useParams();
 
-  const task = initialDataTasks.find((task) => task.id === Number(taskId));
+  const task = initialDataTasks.find((t) => t.id === Number(taskId));
 
   if (!task) {
     return (
-      <div>
-        <h1>Task not found</h1>
-      </div>
+      <section className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-xl p-6">
+        <h1 className="text-2xl font-bold text-red-600 mb-2">Task not found</h1>
+        <Link to="/" className="text-sky-600 underline">
+          Back to Home
+        </Link>
+      </section>
     );
   }
 
   return (
-    <section className="flex justify-between gap-4 rounded-lg bg-sky-100 p-4">
-      <div>
-        <h2 className="text-lg font-bold">{task.title}</h2>
-        <p>{task.isDone ? "✅ Done" : "📝 Todo"}</p>
+    <section className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
+      <h1 className="text-3xl font-bold text-sky-700 mb-4">Task Detail</h1>
+
+      <div className="space-y-3">
+        <p className="text-gray-600 text-sm">
+          Status:
+          <span className="ml-1 font-semibold">
+            {task.isDone ? "✅ Done" : "📝 Todo"}
+          </span>
+        </p>
+
+        <h2 className="text-2xl font-semibold text-gray-800">{task.title}</h2>
+
+        <p className="text-gray-700">{task.description}</p>
       </div>
     </section>
   );
