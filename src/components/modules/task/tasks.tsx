@@ -8,6 +8,7 @@ import {
   type Task,
   type Tasks,
 } from "@/components/modules/task/schema";
+import { Link } from "react-router";
 
 const initialDataTasks: Tasks = [
   {
@@ -107,7 +108,7 @@ export function TaskItem({
   handleDelete,
 }: {
   task: Task;
-  handleDelete: () => void;
+  handleDelete?: () => void;
 }) {
   return (
     <section
@@ -125,15 +126,19 @@ export function TaskItem({
       </div>
 
       <div className="flex gap-2">
-        <Button>
-          <Eye className="w-4 h-4" />
-          View
+        <Button asChild>
+          <Link to={`/tasks/${task.id}`}>
+            <Eye className="w-4 h-4" />
+            <span>View</span>
+          </Link>
         </Button>
 
-        <Button onClick={handleDelete} variant={"destructive"}>
-          <Trash2 className="w-4 h-4" />
-          Delete
-        </Button>
+        {handleDelete && (
+          <Button onClick={handleDelete} variant={"destructive"}>
+            <Trash2 className="w-4 h-4" />
+            Delete
+          </Button>
+        )}
       </div>
     </section>
   );
