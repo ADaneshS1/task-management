@@ -6,6 +6,7 @@ import About from "@/routes/about";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "./layouts/layout";
+import { TaskId } from "./routes/taskId";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -14,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />
           <Route path="/about" element={<About />} />
+          <Route path="/tasks/:taskId" element={<TaskId />} />
         </Route>
       </Routes>
     </BrowserRouter>
