@@ -5,7 +5,9 @@ export function Layout() {
     <section>
       <nav className="w-full bg-white shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-12 py-4">
-          <h1 className="text-2xl font-bold text-sky-700">Task Management</h1>
+          <h1 className="text-2xl font-bold text-sky-700">
+            <Link to="/">Task Management</Link>
+          </h1>
 
           <ul className="inline-flex gap-6 text-gray-700 font-medium">
             <li>
