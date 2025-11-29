@@ -6,7 +6,7 @@ import { About } from "@/routes/about";
 
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "./layouts/layout";
-import { TaskId } from "./routes/taskId";
+import { TaskId } from "./routes/task-id";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

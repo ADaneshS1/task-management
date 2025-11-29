@@ -45,6 +45,7 @@ const initialDataTasks: Tasks = [
 
 export function Tasks() {
   const [tasks, setTasks] = useState(initialDataTasks);
+
   function handleDelete(id: number) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);

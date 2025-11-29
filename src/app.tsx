@@ -1,4 +1,4 @@
-import { Tasks } from "./components/modules/task/tasks";
+import { Tasks } from "@/components/modules/task/tasks";
 
 export function App() {
   return (

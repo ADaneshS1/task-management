@@ -37,7 +37,7 @@ const initialDataTasks: Tasks = [
 export function TaskId() {
   const { taskId } = useParams();
 
-  const task = initialDataTasks.find((t) => t.id === Number(taskId));
+  const task = initialDataTasks.find((task) => task.id === Number(taskId));
 
   if (!task) {
     return (
@@ -52,7 +52,7 @@ export function TaskId() {
 
   return (
     <section className="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-      <h1 className="text-3xl font-bold text-sky-700 mb-4">Task Detail</h1>
+      <h1 className="text-3xl font-bold text-sky-700 mb-4">{task.title}</h1>
 
       <div className="space-y-3">
         <p className="text-gray-600 text-sm">
@@ -61,8 +61,6 @@ export function TaskId() {
             {task.isDone ? "✅ Done" : "📝 Todo"}
           </span>
         </p>
-
-        <h2 className="text-2xl font-semibold text-gray-800">{task.title}</h2>
 
         <p className="text-gray-700">{task.description}</p>
       </div>
