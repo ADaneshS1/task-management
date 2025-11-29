@@ -9,39 +9,9 @@ import {
   type Tasks,
 } from "@/components/modules/task/schema";
 import { Link } from "react-router";
-
-const initialDataTasks: Tasks = [
-  {
-    id: 1,
-    title: "Pray",
-    description: "Morning prayer routine",
-    isDone: true,
-  },
-  {
-    id: 2,
-    title: "Eat",
-    description: "Breakfast at 8 AM",
-    isDone: false,
-  },
-  {
-    id: 3,
-    title: "Exercise",
-    description: "Quick workout for 20 minutes",
-    isDone: true,
-  },
-  {
-    id: 4,
-    title: "Rest",
-    description: "Take a break and relax",
-    isDone: false,
-  },
-  {
-    id: 5,
-    title: "Study",
-    description: "Learn React for 1 hour",
-    isDone: false,
-  },
-];
+import z from "zod";
+import { toast } from "sonner";
+import { initialDataTasks } from "@/components/modules/task/data";
 
 export function Tasks() {
   const [tasks, setTasks] = useState(initialDataTasks);
@@ -52,29 +22,32 @@ export function Tasks() {
   }
 
   function handleCreate(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+      const formData = new FormData(event.currentTarget);
 
-    const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
+      const newId = tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 1;
 
-    const newTask = {
-      id: newId,
-      title: formData.get("title")?.toString().trim() || "",
-      description: formData.get("description")?.toString().trim() || "",
-      isDone: false,
-    };
+      const newTask = {
+        id: newId,
+        title: formData.get("title")?.toString().trim() || "",
+        description: formData.get("description")?.toString().trim() || "",
+        isDone: false,
+      };
 
-    const result = TaskSchema.safeParse(newTask);
-    if (!result.success) {
-      alert("New title or description invalid");
-      return null;
+      TaskSchema.parse(newTask);
+
+      const updatedTasks: Tasks = [...tasks, newTask];
+      setTasks(updatedTasks);
+
+      event.currentTarget.reset();
+    } catch (error: unknown) {
+      if (error instanceof z.ZodError) {
+        const messages = error.issues.map((issue) => issue.message).join(", ");
+        toast.error("Task invalid", { description: messages });
+      }
     }
-
-    const updatedTasks: Tasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-
-    event.currentTarget.reset();
   }
 
   return (

@@ -7,10 +7,12 @@ import { About } from "@/routes/about";
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Layout } from "./layouts/layout";
 import { TaskId } from "./routes/task-id";
+import { Toaster } from "@/components/ui/sonner";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<App />} />
