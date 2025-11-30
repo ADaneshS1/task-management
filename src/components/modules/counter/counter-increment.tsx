@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export function ButtonIncrement() {
-  const [count, setCount] = useState(0);
+export function CounterIncrement() {
+  const [count, setCount] = useState(() => {
+    const storedCount = localStorage.getItem("count");
+    return storedCount ? Number(storedCount) : 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("count", String(count));
+  }, [count]);
+
   function handleIncrement() {
     setCount(count + 1);
   }
