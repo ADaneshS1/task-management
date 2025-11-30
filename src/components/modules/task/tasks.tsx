@@ -1,6 +1,6 @@
 import { Eye, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,7 +14,14 @@ import { toast } from "sonner";
 import { initialDataTasks } from "@/components/modules/task/data";
 
 export function Tasks() {
-  const [tasks, setTasks] = useState(initialDataTasks);
+  const [tasks, setTasks] = useState(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    return storedTasks ? (JSON.parse(storedTasks) as Tasks) : initialDataTasks;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   function handleDelete(id: number) {
     const updatedTasks = tasks.filter((task) => task.id !== id);
