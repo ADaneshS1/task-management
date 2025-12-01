@@ -28,7 +28,7 @@ export function Tasks() {
     setTasks(updatedTasks);
   }
 
-  function handletoggle(id: number) {
+  function handleToggle(id: number) {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, isDone: !task.isDone } : task
     );
@@ -86,7 +86,7 @@ export function Tasks() {
             <TaskItem
               task={task}
               handleDelete={() => handleDelete(task.id)}
-              handletoggle={() => handletoggle(task.id)}
+              handleToggle={() => handleToggle(task.id)}
             />
           </li>
         ))}
@@ -98,11 +98,11 @@ export function Tasks() {
 export function TaskItem({
   task,
   handleDelete,
-  handletoggle,
+  handleToggle,
 }: {
   task: Task;
   handleDelete?: () => void;
-  handletoggle?: () => void;
+  handleToggle?: () => void;
 }) {
   return (
     <section
@@ -126,7 +126,7 @@ export function TaskItem({
           </Link>
         </Button>
 
-        <Button onClick={handletoggle}>Toggle</Button>
+        <Button onClick={handleToggle}>Toggle</Button>
 
         {handleDelete && (
           <Button onClick={handleDelete} variant={"destructive"}>
