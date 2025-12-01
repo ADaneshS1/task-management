@@ -28,6 +28,13 @@ export function Tasks() {
     setTasks(updatedTasks);
   }
 
+  function handletoggle(id: number) {
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, isDone: !task.isDone } : task
+    );
+    setTasks(updatedTasks);
+  }
+
   function handleCreate(event: React.FormEvent<HTMLFormElement>) {
     try {
       event.preventDefault();
@@ -76,7 +83,11 @@ export function Tasks() {
       <ul className="space-y-3">
         {tasks.map((task) => (
           <li key={task.id}>
-            <TaskItem task={task} handleDelete={() => handleDelete(task.id)} />
+            <TaskItem
+              task={task}
+              handleDelete={() => handleDelete(task.id)}
+              handletoggle={() => handletoggle(task.id)}
+            />
           </li>
         ))}
       </ul>
@@ -87,9 +98,11 @@ export function Tasks() {
 export function TaskItem({
   task,
   handleDelete,
+  handletoggle,
 }: {
   task: Task;
   handleDelete?: () => void;
+  handletoggle?: () => void;
 }) {
   return (
     <section
@@ -103,7 +116,6 @@ export function TaskItem({
           {task.isDone ? "✔️ Done" : "📝 Todo"}
         </p>
         <p className="font-semibold text-gray-800">{task.title}</p>
-        <p className="font-semibold text-gray-800">{task.description}</p>
       </div>
 
       <div className="flex gap-2">
@@ -113,6 +125,8 @@ export function TaskItem({
             <span>View</span>
           </Link>
         </Button>
+
+        <Button onClick={handletoggle}>Toogle</Button>
 
         {handleDelete && (
           <Button onClick={handleDelete} variant={"destructive"}>
