@@ -126,7 +126,7 @@ export function TaskItem({
           </Link>
         </Button>
 
-        <Button onClick={handletoggle}>Toogle</Button>
+        <Button onClick={handletoggle}>Toggle</Button>
 
         {handleDelete && (
           <Button onClick={handleDelete} variant={"destructive"}>
